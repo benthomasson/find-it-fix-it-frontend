@@ -48,7 +48,7 @@ InsightsRoute.propTypes = {
  *
  * Route properties:
  *      exact - path must match exactly,
- *      path - https://prod.foo.redhat.com:1337/insights/tower-analytics/rules
+ *      path - https://prod.foo.redhat.com:1337/insights/find-it-fix-it/rules
  *      component - component to be rendered when a route has been chosen.
  */
 export const Routes = (props: Props) => {

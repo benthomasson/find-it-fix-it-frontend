@@ -108,7 +108,7 @@ class SamplePage extends Component {
         return (
             <React.Fragment>
                 <PageHeader>
-                    <PageHeaderTitle title='Tower Analytics'/>
+                    <PageHeaderTitle title='Find It Fix It'/>
                 </PageHeader>
                 <Main>
                     <Card>

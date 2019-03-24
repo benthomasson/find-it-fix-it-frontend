@@ -2,6 +2,6 @@
 
 module.exports = {
     routes: {
-        '/apps/tower-analytics': { host: 'http://localhost:8002' }
+        '/apps/find-it-fix-it': { host: 'http://localhost:8002' }
     }
 };

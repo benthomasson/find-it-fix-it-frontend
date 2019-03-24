@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'production' && betaBranch) {
     deploymentEnv = '/beta';
 }
 
-const publicPath = `${deploymentEnv}apps/tower-analytics/`;
+const publicPath = `${deploymentEnv}apps/find-it-fix-it/`;
 
 module.exports = {
     paths: {
