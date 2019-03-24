@@ -9,7 +9,7 @@ class App extends Component {
 
     componentDidMount () {
         insights.chrome.init();
-        insights.chrome.identifyApp('find-it-fix-it');
+        insights.chrome.identifyApp('remediations');
         insights.chrome.navigation(buildNavigation());
 
         this.appNav = insights.chrome.on('APP_NAVIGATION', event => this.props.history.push(`/${event.navId}`));
