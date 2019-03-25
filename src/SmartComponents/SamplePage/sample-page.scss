@@ -1,19 +1,26 @@
 // js generates class '.page__{rootClass}' that wraps the content in your page added to the root tag
 // Found in Routes.js as the rootClass
 .pf-c-data-list__cell {
-    --pf-c-data-list__cell--PaddingTop: 10px;
-    --pf-c-data-list__cell-cell--PaddingTop: 10px;
-    --pf-c-data-list__cell--PaddingBottom: 10px;
+    --pf-c-card__body--PaddingTop: 10px;
+    --pf-c-card__body-cell--PaddingTop: 10px;
+    --pf-c-card__body--PaddingBottom: 10px;
 }
 
 .dataCard {
-    .pf-c-data-list {
+    .pf-c-card {
         flex: 1;
         margin-right: 0;
     }
 
-    ul + ul {
+    article + article {
         margin-left: 20px;
+    }
+}
+
+.logCard {
+    .pf-c-card {
+        flex: 1;
+        margin-right: 0;
     }
 }
 
@@ -21,9 +28,8 @@
     .dataCard {
         flex-direction: column;
 
-        .pf-c-data-list {
+        .pf-c-card {
             margin: 20px 0 0 0;
         }
-
     }
 }

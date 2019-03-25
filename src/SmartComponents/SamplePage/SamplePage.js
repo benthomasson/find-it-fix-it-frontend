@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import './sample-page.scss';
-import BarChart from './BarChart.js';
 
 import { Section, Main, PageHeader, PageHeaderTitle } from '@red-hat-insights/insights-frontend-components';
 import { WarningTriangleIcon } from '@patternfly/react-icons';
@@ -19,7 +18,9 @@ import {
     DropdownToggle,
     DropdownItem,
     DropdownSeparator,
-    Modal
+    Modal,
+    Grid,
+    GridItem
 } from '@patternfly/react-core';
 
 import SampleComponent from '../../PresentationalComponents/SampleComponent/sample-component';
@@ -111,174 +112,88 @@ class SamplePage extends Component {
                     <PageHeaderTitle title='Find It Fix It'/>
                 </PageHeader>
                 <Main>
+                    <div className="dataCard" style={{ display: 'flex' }}>
+											<Card>
+												<CardHeader style={{ borderBottom: '2px solid #ebebeb', display: 'flex', justifyContent: 'space-between' }}>Details</CardHeader>
+												<CardBody>
+                        <Grid gutter="md">
+                        <GridItem span={2}><b>Title</b></GridItem>
+                        <GridItem span={10}>Place title here</GridItem>
+                        <GridItem span={2}><b>Plan</b></GridItem>
+                        <GridItem span={10}><ul><li><a href="">Plan Title 1</a></li>
+                                                <li><a href="">Plan Title 2</a></li></ul></GridItem>
+                        <GridItem span={2}><b>Playbook</b></GridItem>
+                        <GridItem span={10}><a href="">Place playbook link here</a></GridItem>
+                        </Grid>
+												</CardBody>
+											</Card>
+											<Card>
+												<CardHeader style={{ borderBottom: '2px solid #ebebeb', display: 'flex', justifyContent: 'space-between' }}>Tasks</CardHeader>
+												<CardBody>
+
+                        <DataList aria-label="Simple data list example">
+                            <DataListItem aria-labelledby="simple-item1">
+                                <DataListCell>
+                                    <h3>Host</h3>
+                                </DataListCell>
+                                <DataListCell style={ dataListCellStyle }>
+                                    <h3>Activity</h3>
+                                </DataListCell>
+                            </DataListItem>
+                            <DataListItem aria-labelledby="simple-item1">
+                                <DataListCell>
+                                    <h3>Host Name 5</h3>
+                                </DataListCell>
+                                <DataListCell style={ dataListCellStyle }>
+                                    <h3>Gathering Facts</h3>
+                                </DataListCell>
+                            </DataListItem>
+                            <DataListItem aria-labelledby="simple-item1">
+                                <DataListCell>
+                                    <h3>Host Name 4</h3>
+                                </DataListCell>
+                                <DataListCell style={ dataListCellStyle }>
+                                    <h3>Gathering Facts</h3>
+                                </DataListCell>
+                            </DataListItem>
+                            <DataListItem aria-labelledby="simple-item1">
+                                <DataListCell>
+                                    <h3>Host Name 3</h3>
+                                </DataListCell>
+                                <DataListCell style={ dataListCellStyle }>
+                                    <h3>Gathering Facts</h3>
+                                </DataListCell>
+                            </DataListItem>
+                            <DataListItem aria-labelledby="simple-item1">
+                                <DataListCell>
+                                    <h3>Host Name 2</h3>
+                                </DataListCell>
+                                <DataListCell style={ dataListCellStyle }>
+                                    <h3>Gathering Facts</h3>
+                                </DataListCell>
+                            </DataListItem>
+                            <DataListItem aria-labelledby="simple-item1">
+                                <DataListCell>
+                                    <h3>Host Name 1</h3>
+                                </DataListCell>
+                                <DataListCell style={ dataListCellStyle }>
+                                    <h3>Gathering Facts</h3>
+                                </DataListCell>
+                            </DataListItem>
+                        </DataList>
+
+                        </CardBody>
+											</Card>
+                    </div>
+										<div className="logCard" style={{ display: 'flex', marginTop: '20px' }} >
                     <Card>
                         <CardHeader style={{ borderBottom: '2px solid #ebebeb', display: 'flex', justifyContent: 'space-between' }}>
-                            <h1>Job Status</h1>
-                            <div>
-                                <Dropdown
-                                    style={{ border: '1px solid #ededed', borderBottomColor: '#282d33', marginRight: '20px' }}
-                                    onSelect={this.onLeftSelect}
-                                    toggle={<DropdownToggle onToggle={this.onLeftToggle}>Left Dropdown</DropdownToggle>}
-                                    isOpen={isLeftOpen}
-                                    dropdownItems={dropdownItems}
-                                />
-                                <Dropdown
-                                    style={{ border: '1px solid #ededed', borderBottomColor: '#282d33' }}
-                                    onSelect={this.onRightSelect}
-                                    toggle={<DropdownToggle onToggle={this.onRightToggle}>Right Dropdown</DropdownToggle>}
-                                    isOpen={isRightOpen}
-                                    dropdownItems={dropdownItems}
-                                />
-                            </div>
+                            <h1>Log</h1>
                         </CardHeader>
                         <CardBody>
-                            <BarChart width={ 700 } height={ 350 } id='bar-chart-root' />
                         </CardBody>
-                    </Card>
-                    <div className="dataCard" style={{ display: 'flex', marginTop: '20px' }}>
-                        <DataList aria-label="Simple data list example">
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Top Templates</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <h3>Type</h3>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>Template Name 1</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>Playbook Run</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item2">
-                                <DataListCell>
-                                <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>Template Name 2</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>Workflow</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>Template Name 3</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>Playbook Run</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>Template Name 4</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>Playbook Run</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>Template Name 5</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>Playbook Run</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                        </DataList>
-                        <DataList aria-label="Simple data list example">
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Top Modules</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <h3>Usage</h3>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span>Module Name 1</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>5</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item2">
-                                <DataListCell>
-                                    <span>Module Name 2</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>11</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span>Module Name 3</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>22</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span>Module Name 4</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>17</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span>Module Name 5</span>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <Badge isRead>7</Badge>
-                                </DataListCell>
-                            </DataListItem>
-                        </DataList>
-                        <DataList style={{ flex: '1' }} aria-label="Simple data list example">
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Notifications</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                <Dropdown
-                                    style={{ border: '1px solid #ededed', borderBottomColor: '#282d33' }}
-                                    onSelect={this.onRightSelect}
-                                    toggle={<DropdownToggle onToggle={this.onRightToggle}>Right Dropdown</DropdownToggle>}
-                                    isOpen={isRightOpen}
-                                    dropdownItems={dropdownItems}
-                                />
-                                </DataListCell>
-                            </DataListItem>
-
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span><WarningTriangleIcon style={{ color: '#db524b', marginRight: '5px' }}/>It's 3am, time to create some chaos </span>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item2">
-                                <DataListCell>
-                                    <span><WarningTriangleIcon style={{ color: '#f0ad37', marginRight: '5px' }}/>why use post when this sofa is here.</span>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span>Kitty scratches couch bad kitty</span>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span>lick the curtain just to be annoying or bite</span>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <span>off human's toes meow loudly just to annoy owners.</span>
-                                </DataListCell>
-                            </DataListItem>
-                        </DataList>
-                    </div>
+										</Card>
+										</div>
                     <Modal
                         title={'Template Name 1'}
                         isOpen={isModalOpen}
