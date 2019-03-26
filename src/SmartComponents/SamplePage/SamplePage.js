@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import './sample-page.scss';
+import Controller from './logic.js';
 
 import { Main, PageHeader, PageHeaderTitle } from '@red-hat-insights/insights-frontend-components';
 import { DownloadIcon, ExclamationCircleIcon, CircleIcon } from '@patternfly/react-icons';
@@ -36,6 +37,7 @@ class SamplePage extends Component {
         this.state = {
           isModalOpen: false
         };
+        this.controller = new Controller(this);
 
         this.handleModalToggle = this.handleModalToggle.bind(this);
     }
@@ -45,6 +47,12 @@ class SamplePage extends Component {
             isModalOpen: !this.state.isModalOpen
         });
     };
+    shouldComponentUpdate (nextProps, nextState) {
+        return true;
+    }
+    componentDidMount() {
+        this.controller.init();
+    }
 
     render() {
         const { isModalOpen } = this.state;
@@ -66,7 +74,7 @@ class SamplePage extends Component {
                             <CardBody>
                                 <Grid gutter="md">
                                     <GridItem span={2}><b>Title</b></GridItem>
-                                    <GridItem span={10}>Place title here</GridItem>
+                                    <GridItem span={10}>{this.controller.playbook.name}</GridItem>
                                     <GridItem span={2}><b>Plan</b></GridItem>
                                     <GridItem span={10}><ul><li><a href="">Plan Title 1</a></li>
                                                             <li><a href="">Plan Title 2</a></li></ul></GridItem>

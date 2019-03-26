@@ -8,7 +8,8 @@
     "@patternfly/react-core": "1.51.6",
     "@red-hat-insights/insights-frontend-components": "^3.33.57",
     "classnames": "^2.2.5",
-    "create-react-class": "^15.6.3"
+    "create-react-class": "^15.6.3",
+    "message-fsm": "^1.0.1"
   },
   "sassIncludes": {
     "patternfly": "node_modules/patternfly/dist/sass",
