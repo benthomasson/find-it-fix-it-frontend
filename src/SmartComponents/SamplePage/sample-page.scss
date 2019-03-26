@@ -57,6 +57,24 @@
     --pf-c-tooltip__content--PaddingTop: 10px;
 }
 
+.playBookCard {
+    .pf-c-card {
+        padding-top: 20;
+    }
+    .pf-c-card__body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.downloadIcon {
+    background: '#337AB7',
+}
+
+.downloadIcon:hover {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
     .dataCard {
         flex-direction: column;

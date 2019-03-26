@@ -169,10 +169,12 @@ class SamplePage extends Component {
                             <Tooltip
                                 position="left"
                                 content={<p>Download Log</p>} >
-                                <DownloadIcon size="md"/>
+                                <Button className="downloadIcon" variant="plain" aria-label="Action">
+                                <DownloadIcon  size="sm"/>
+                                </Button>
                             </Tooltip>
                         </CardHeader>
-                        <CardBody>
+                        <CardBody style={{ overflowY: 'auto', paddingTop: '20px'}}>
                         <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                         <pre style={{fontFamily: 'monospace',
                                      backgroundColor: '#e8e8e8',
@@ -283,7 +285,7 @@ changed: [Host4]
                             <Button key="cancel" variant="secondary" onClick={this.handleModalToggle}>Close</Button>
                         ]}
                     >
-                        <Card>
+                        <Card className="playBookCard" style={{borderTop: '1px solid #aeaeae'}}>
 
                         <CardBody>
                         <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
