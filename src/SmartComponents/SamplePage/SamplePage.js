@@ -20,7 +20,8 @@ import {
     DropdownSeparator,
     Modal,
     Grid,
-    GridItem
+    GridItem,
+    Tooltip
 } from '@patternfly/react-core';
 
 import SampleComponent from '../../PresentationalComponents/SampleComponent/sample-component';
@@ -84,8 +85,8 @@ class SamplePage extends Component {
         const { isLeftOpen, isRightOpen, isModalOpen } = this.state;
 
         const dataListCellStyle = {
-            display: 'flex',
-            justifyContent: 'flex-end'
+            color: '#aeaeae',
+            fontStyle: 'italic'
         };
 
         const dropdownItems = [
@@ -112,84 +113,86 @@ class SamplePage extends Component {
                     <PageHeaderTitle title='Find It Fix It'/>
                 </PageHeader>
                 <Main>
-                    <div className="dataCard" style={{ display: 'flex' }}>
-											<Card>
-												<CardHeader style={{ borderBottom: '2px solid #ebebeb', display: 'flex', justifyContent: 'space-between' }}>Details</CardHeader>
-												<CardBody>
-                        <Grid gutter="md">
-                        <GridItem span={2}><b>Title</b></GridItem>
-                        <GridItem span={10}>Place title here</GridItem>
-                        <GridItem span={2}><b>Plan</b></GridItem>
-                        <GridItem span={10}><ul><li><a href="">Plan Title 1</a></li>
-                                                <li><a href="">Plan Title 2</a></li></ul></GridItem>
-                        <GridItem span={2}><b>Playbook</b></GridItem>
-                        <GridItem span={10}><a href="">Place playbook link here</a></GridItem>
-                        </Grid>
-												</CardBody>
-											</Card>
-											<Card>
-												<CardHeader style={{ borderBottom: '2px solid #ebebeb', display: 'flex', justifyContent: 'space-between' }}>Tasks</CardHeader>
-												<CardBody>
-
-                        <DataList aria-label="Simple data list example">
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Host</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <h3>Activity</h3>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Host Name 5</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <h3>Gathering Facts</h3>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Host Name 4</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <h3>Gathering Facts</h3>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Host Name 3</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <h3>Gathering Facts</h3>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Host Name 2</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <h3>Gathering Facts</h3>
-                                </DataListCell>
-                            </DataListItem>
-                            <DataListItem aria-labelledby="simple-item1">
-                                <DataListCell>
-                                    <h3>Host Name 1</h3>
-                                </DataListCell>
-                                <DataListCell style={ dataListCellStyle }>
-                                    <h3>Gathering Facts</h3>
-                                </DataListCell>
-                            </DataListItem>
-                        </DataList>
-
-                        </CardBody>
-											</Card>
-                    </div>
-										<div className="logCard" style={{ display: 'flex', marginTop: '20px' }} >
-                    <Card>
-                        <CardHeader style={{ borderBottom: '2px solid #ebebeb', display: 'flex', justifyContent: 'space-between' }}>
+                    <div className="runDetails" style={{ display: 'flex' }}>
+                        <Card className="pf-u-mr-md">
+                            <CardHeader>Details</CardHeader>
+                            <CardBody>
+                                <Grid gutter="md">
+                                    <GridItem span={2}><b>Title</b></GridItem>
+                                    <GridItem span={10}>Place title here</GridItem>
+                                    <GridItem span={2}><b>Plan</b></GridItem>
+                                    <GridItem span={10}><ul><li><a href="">Plan Title 1</a></li>
+                                                            <li><a href="">Plan Title 2</a></li></ul></GridItem>
+                                    <GridItem span={2}><b>Playbook</b></GridItem>
+                                    <GridItem span={10}><a href="">Place playbook link here</a></GridItem>
+                                </Grid>
+                            </CardBody>
+                        </Card>
+                        <Card className="taskCard">
+                            <CardHeader>Tasks</CardHeader>
+                                <CardBody>
+                                    <DataList aria-label="Simple data list example">
+                                        <DataListItem aria-labelledby="simple-item1" style={{ marginBottom: '8px' }}>
+                                            <DataListCell>
+                                                <h3><b>Host</b></h3>
+                                            </DataListCell>
+                                            <DataListCell>
+                                                <h3><b>Activity</b></h3>
+                                            </DataListCell>
+                                        </DataListItem>
+                                        <DataListItem aria-labelledby="simple-item1">
+                                            <DataListCell>
+                                                <h3>Host Name 5</h3>
+                                            </DataListCell>
+                                            <DataListCell style={ dataListCellStyle }>
+                                                <h3>Gathering Facts</h3>
+                                            </DataListCell>
+                                        </DataListItem>
+                                        <DataListItem aria-labelledby="simple-item1">
+                                            <DataListCell>
+                                                <h3>Host Name 4</h3>
+                                            </DataListCell>
+                                            <DataListCell style={ dataListCellStyle }>
+                                                <h3>Gathering Facts</h3>
+                                            </DataListCell>
+                                        </DataListItem>
+                                        <DataListItem aria-labelledby="simple-item1">
+                                            <DataListCell>
+                                                <h3>Host Name 3</h3>
+                                            </DataListCell>
+                                            <DataListCell style={ dataListCellStyle }>
+                                                <h3>Gathering Facts</h3>
+                                            </DataListCell>
+                                        </DataListItem>
+                                        <DataListItem aria-labelledby="simple-item1">
+                                            <DataListCell>
+                                                <h3>Host Name 2</h3>
+                                            </DataListCell>
+                                            <DataListCell style={ dataListCellStyle }>
+                                                <h3>Gathering Facts</h3>
+                                            </DataListCell>
+                                        </DataListItem>
+                                        <DataListItem aria-labelledby="simple-item1">
+                                            <DataListCell>
+                                                <h3>Host Name 1</h3>
+                                            </DataListCell>
+                                            <DataListCell style={ dataListCellStyle }>
+                                                <h3>Gathering Facts</h3>
+                                            </DataListCell>
+                                        </DataListItem>
+                                    </DataList>
+                                </CardBody>
+                            </Card>
+                        </div>
+                    <Card className="logCard">
+                        <CardHeader style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <h1>Log</h1>
-                            <DownloadIcon/>
+                            <Tooltip
+                                position="left"
+                                content={<p>Download Log</p>}
+                            >
+                                <DownloadIcon size="md"/>
+                            </Tooltip>
                         </CardHeader>
                         <CardBody>
                         <pre style={{fontFamily: 'monospace',
@@ -241,8 +244,7 @@ changed: [Host2]
 changed: [Host4]
                                `}</pre>
                         </CardBody>
-										</Card>
-										</div>
+                    </Card>
                     <Modal
                         title={'Template Name 1'}
                         isOpen={isModalOpen}
