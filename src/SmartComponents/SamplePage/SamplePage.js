@@ -57,7 +57,7 @@ class SamplePage extends Component {
         return (
             <React.Fragment>
                 <PageHeader>
-                    <PageHeaderTitle title='Find It Fix It'/>
+                    <PageHeaderTitle title='Find It, Fix It'/>
                 </PageHeader>
                 <Main>
                     <div className="runDetails" style={{ display: 'flex' }}>
@@ -278,17 +278,17 @@ changed: [Host4]
                         </CardBody>
                     </Card>
                     <Modal
-                        title={'Playbook Title'}
+                        title={<div style={{borderBottom: '1px solid #aeaeae', paddingBottom: '20px', marginBottom: '20px'}}>{'Playbook Title'}</div>}
                         isOpen={isModalOpen}
                         onClose={this.handleModalToggle}
                         actions={[
                             <Button key="cancel" variant="secondary" onClick={this.handleModalToggle}>Close</Button>
                         ]}
                     >
-                        <Card className="playBookCard" style={{borderTop: '1px solid #aeaeae'}}>
+                        <Card className="playBookCard">
 
                         <CardBody>
-                        <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                        <div style={{display: 'flex', justifyContent: 'flex-start' }}>
                         <pre style={{fontFamily: 'monospace',
                                      backgroundColor: '#e8e8e8',
                                      padding: '10px',
