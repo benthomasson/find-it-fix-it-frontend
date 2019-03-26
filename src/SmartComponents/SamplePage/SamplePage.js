@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import './sample-page.scss';
 
 import { Section, Main, PageHeader, PageHeaderTitle } from '@red-hat-insights/insights-frontend-components';
-import { WarningTriangleIcon } from '@patternfly/react-icons';
+import { DownloadIcon } from '@patternfly/react-icons';
 import {
     Badge,
     Button,
@@ -189,8 +189,57 @@ class SamplePage extends Component {
                     <Card>
                         <CardHeader style={{ borderBottom: '2px solid #ebebeb', display: 'flex', justifyContent: 'space-between' }}>
                             <h1>Log</h1>
+                            <DownloadIcon/>
                         </CardHeader>
                         <CardBody>
+                        <pre style={{fontFamily: 'monospace',
+																		 backgroundColor: '#f6f6f6',
+																		 padding: '20px',
+																		 borderStyle: 'solid',
+																		 borderColor: '#b7b7b7',
+																	   whiteSpace: 'pre'}}>{`
+PLAY [Update system to the latest kernel and reboot] ***************************
+
+TASK [Gathering Facts] *********************************************************
+
+ok: [Host1]
+
+ok: [Host2]
+
+ok: [Host3]
+
+ok: [Host4]
+
+TASK [Update kernel] ***********************************************************
+
+ok: [Host1]
+
+ok: [Host4]
+
+ok: [Host2]
+
+ok: [Host3]
+
+TASK [set reboot fact] *********************************************************
+
+skipping: [Host1]
+
+skipping: [Host2]
+
+skipping: [Host3]
+
+skipping: [Host4]
+
+TASK [get latest installed kernel package version] *****************************
+
+changed: [Host1]
+
+changed: [Host3]
+
+changed: [Host2]
+
+changed: [Host4]
+                               `}</pre>
                         </CardBody>
 										</Card>
 										</div>
