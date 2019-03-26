@@ -3,10 +3,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import './sample-page.scss';
 
-import { Section, Main, PageHeader, PageHeaderTitle } from '@red-hat-insights/insights-frontend-components';
+import { Main, PageHeader, PageHeaderTitle } from '@red-hat-insights/insights-frontend-components';
 import { DownloadIcon } from '@patternfly/react-icons';
 import {
-    Badge,
     Button,
     Card,
     CardBody,
@@ -14,10 +13,6 @@ import {
     DataList,
     DataListItem,
     DataListCell,
-    Dropdown,
-    DropdownToggle,
-    DropdownItem,
-    DropdownSeparator,
     Modal,
     Grid,
     GridItem,
@@ -39,41 +34,11 @@ class SamplePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          isLeftOpen: false,
-          isRightOpen: false,
           isModalOpen: false
         };
 
-        this.onLeftToggle = this.onLeftToggle.bind(this);
-        this.onRightToggle = this.onRightToggle.bind(this);
-        this.onLeftSelect = this.onLeftSelect.bind(this);
-        this.onRightSelect = this.onRightSelect.bind(this);
         this.handleModalToggle = this.handleModalToggle.bind(this);
     }
-
-    onLeftToggle (isLeftOpen) {
-        this.setState({
-          isLeftOpen
-        });
-    };
-
-    onRightToggle (isRightOpen) {
-        this.setState({
-          isRightOpen
-        });
-    };
-
-    onLeftSelect (event) {
-        this.setState({
-          isLeftOpen: !this.state.isLeftOpen
-        });
-    };
-
-    onRightSelect (event) {
-        this.setState({
-          isRightOpen: !this.state.isRightOpen
-        });
-    };
 
     handleModalToggle () {
         this.setState({
@@ -82,30 +47,12 @@ class SamplePage extends Component {
     };
 
     render() {
-        const { isLeftOpen, isRightOpen, isModalOpen } = this.state;
+        const { isModalOpen } = this.state;
 
         const dataListCellStyle = {
             color: '#aeaeae',
             fontStyle: 'italic'
         };
-
-        const dropdownItems = [
-          <DropdownItem key="link">Link</DropdownItem>,
-          <DropdownItem key="action" component="button">
-            Action
-          </DropdownItem>,
-          <DropdownItem key="disabled link" isDisabled>
-            Disabled Link
-          </DropdownItem>,
-          <DropdownItem key="disabled action" isDisabled component="button">
-            Disabled Action
-          </DropdownItem>,
-          <DropdownSeparator key="separator" />,
-          <DropdownItem key="separated link">Separated Link</DropdownItem>,
-          <DropdownItem key="separated action" component="button">
-            Separated Action
-          </DropdownItem>
-        ];
 
         return (
             <React.Fragment>
@@ -197,8 +144,8 @@ class SamplePage extends Component {
                         <CardBody>
                         <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                         <pre style={{fontFamily: 'monospace',
-																		 backgroundColor: '#e8e8e8',
-																		 padding: '10px',
+                                    backgroundColor: '#e8e8e8',
+                                    padding: '10px',
                                      border: '1px solid #b7b7b7',
                                      borderRight: '0px',
                                      whiteSpace: 'pre'}}>
