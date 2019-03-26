@@ -195,13 +195,64 @@ class SamplePage extends Component {
                             </Tooltip>
                         </CardHeader>
                         <CardBody>
+                        <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                        <pre style={{fontFamily: 'monospace',
+																		 backgroundColor: '#e8e8e8',
+																		 padding: '10px',
+                                     border: '1px solid #b7b7b7',
+                                     borderRight: '0px',
+                                     whiteSpace: 'pre'}}>
+{` 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+32
+34
+35
+36
+37
+38
+39
+40
+41
+42
+`}
+                        </pre>
                         <pre style={{fontFamily: 'monospace',
 																		 backgroundColor: '#f6f6f6',
-																		 padding: '20px',
-																		 borderStyle: 'solid',
-																		 borderColor: '#b7b7b7',
-																	   whiteSpace: 'pre'}}>{`
-PLAY [Update system to the latest kernel and reboot] ***************************
+																		 padding: '10px',
+                                     flex: '1',
+                                     border: '1px solid #b7b7b7',
+                                     marginTop: '0px',
+																	   whiteSpace: 'pre'}}>{`PLAY [Update system to the latest kernel and reboot] ***************************
 
 TASK [Gathering Facts] *********************************************************
 
@@ -243,6 +294,7 @@ changed: [Host2]
 
 changed: [Host4]
                                `}</pre>
+                               </div>
                         </CardBody>
                     </Card>
                     <Modal
