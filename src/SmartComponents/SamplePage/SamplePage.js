@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom';
 import './sample-page.scss';
 
 import { Main, PageHeader, PageHeaderTitle } from '@red-hat-insights/insights-frontend-components';
-import { DownloadIcon } from '@patternfly/react-icons';
+import { Section, Main, PageHeader, PageHeaderTitle } from '@red-hat-insights/insights-frontend-components';
+import { DownloadIcon, ExclamationCircleIcon, CircleIcon } from '@patternfly/react-icons';
 import {
     Button,
     Card,
@@ -89,7 +90,13 @@ class SamplePage extends Component {
                                         </DataListItem>
                                         <DataListItem aria-labelledby="simple-item1">
                                             <DataListCell>
-                                                <h3>Host Name 5</h3>
+                                                <h3>
+                                                <Tooltip
+                                                    position="left"
+                                                    content={<p>Running</p>} >
+                                                <CircleIcon size="sm"  style={{ color: '#aeaeae', marginRight: '5px' }}/>
+                                                </Tooltip>
+                                                Host Name 5</h3>
                                             </DataListCell>
                                             <DataListCell style={ dataListCellStyle }>
                                                 <h3>Gathering Facts</h3>
@@ -97,7 +104,13 @@ class SamplePage extends Component {
                                         </DataListItem>
                                         <DataListItem aria-labelledby="simple-item1">
                                             <DataListCell>
-                                                <h3>Host Name 4</h3>
+                                                <h3>
+                                                <Tooltip
+                                                    position="left"
+                                                    content={<p>Failed</p>} >
+                                                <ExclamationCircleIcon size="sm" style={{ color: '#d44946', marginRight: '5px' }} />
+                                                </Tooltip>
+                                                Host Name 4</h3>
                                             </DataListCell>
                                             <DataListCell style={ dataListCellStyle }>
                                                 <h3>Gathering Facts</h3>
@@ -105,7 +118,13 @@ class SamplePage extends Component {
                                         </DataListItem>
                                         <DataListItem aria-labelledby="simple-item1">
                                             <DataListCell>
-                                                <h3>Host Name 3</h3>
+                                                <h3>
+                                                <Tooltip
+                                                    position="left"
+                                                    content={<p>Successful</p>} >
+                                                <CircleIcon size="sm" style={{ color: '#52af51', marginRight: '5px' }}/>
+                                                </Tooltip>
+                                                Host Name 3</h3>
                                             </DataListCell>
                                             <DataListCell style={ dataListCellStyle }>
                                                 <h3>Gathering Facts</h3>
@@ -113,7 +132,13 @@ class SamplePage extends Component {
                                         </DataListItem>
                                         <DataListItem aria-labelledby="simple-item1">
                                             <DataListCell>
-                                                <h3>Host Name 2</h3>
+                                                <h3>
+                                                <Tooltip
+                                                    position="left"
+                                                    content={<p>Successful</p>} >
+                                                <CircleIcon size="sm" style={{ color: '#52af51', marginRight: '5px' }}/>
+                                                </Tooltip>
+                                                Host Name 2</h3>
                                             </DataListCell>
                                             <DataListCell style={ dataListCellStyle }>
                                                 <h3>Gathering Facts</h3>
@@ -121,7 +146,13 @@ class SamplePage extends Component {
                                         </DataListItem>
                                         <DataListItem aria-labelledby="simple-item1">
                                             <DataListCell>
-                                                <h3>Host Name 1</h3>
+                                                <h3>
+                                                <Tooltip
+                                                    position="left"
+                                                    content={<p>Successful</p>} >
+                                                <CircleIcon size="sm" style={{ color: '#52af51', marginRight: '5px' }}/>
+                                                </Tooltip>
+                                                Host Name 1</h3>
                                             </DataListCell>
                                             <DataListCell style={ dataListCellStyle }>
                                                 <h3>Gathering Facts</h3>
@@ -136,16 +167,15 @@ class SamplePage extends Component {
                             <h1>Log</h1>
                             <Tooltip
                                 position="left"
-                                content={<p>Download Log</p>}
-                            >
+                                content={<p>Download Log</p>} >
                                 <DownloadIcon size="md"/>
                             </Tooltip>
                         </CardHeader>
                         <CardBody>
                         <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                         <pre style={{fontFamily: 'monospace',
-                                    backgroundColor: '#e8e8e8',
-                                    padding: '10px',
+                                     backgroundColor: '#e8e8e8',
+                                     padding: '10px',
                                      border: '1px solid #b7b7b7',
                                      borderRight: '0px',
                                      whiteSpace: 'pre'}}>
@@ -194,12 +224,12 @@ class SamplePage extends Component {
 `}
                         </pre>
                         <pre style={{fontFamily: 'monospace',
-																		 backgroundColor: '#f6f6f6',
-																		 padding: '10px',
+                                     backgroundColor: '#f6f6f6',
+                                     padding: '10px',
                                      flex: '1',
                                      border: '1px solid #b7b7b7',
                                      marginTop: '0px',
-																	   whiteSpace: 'pre'}}>{`PLAY [Update system to the latest kernel and reboot] ***************************
+                                     whiteSpace: 'pre'}}>{`PLAY [Update system to the latest kernel and reboot] ***************************
 
 TASK [Gathering Facts] *********************************************************
 
