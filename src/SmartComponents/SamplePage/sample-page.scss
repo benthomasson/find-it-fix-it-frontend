@@ -67,12 +67,16 @@
     }
 }
 
-.downloadIcon {
-    background: '#337AB7',
-}
-
-.downloadIcon:hover {
-    cursor: pointer;
+.downloadIcon.pf-c-button.pf-m-tertiary {
+    &:hover {
+        --pf-c-button--m-tertiary--hover--BackgroundColor: #337AB7;
+        --pf-c-button--m-tertiary--hover--BorderColor: transparent;
+        --pf-c-button--m-tertiary--hover--Color: white;
+        cursor: pointer;
+    }
+    &::after {
+        border: none;
+    }
 }
 
 @media only screen and (max-width: 600px) {

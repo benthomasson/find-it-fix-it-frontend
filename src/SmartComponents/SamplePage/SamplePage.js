@@ -169,8 +169,8 @@ class SamplePage extends Component {
                             <Tooltip
                                 position="left"
                                 content={<p>Download Log</p>} >
-                                <Button className="downloadIcon" variant="plain" aria-label="Action">
-                                <DownloadIcon  size="sm"/>
+                                <Button className="downloadIcon" variant="tertiary" aria-label="Action">
+                                    <DownloadIcon size="sm"/>
                                 </Button>
                             </Tooltip>
                         </CardHeader>
