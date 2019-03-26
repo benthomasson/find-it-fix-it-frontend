@@ -77,7 +77,7 @@ class SamplePage extends Component {
                         </Card>
                         <Card className="taskCard">
                             <CardHeader>Tasks</CardHeader>
-                                <CardBody>
+                                <CardBody style={{ maxHeight: '250px', overflowY: 'auto'}}>
                                     <DataList aria-label="Simple data list example">
                                         <DataListItem aria-labelledby="simple-item1" style={{ marginBottom: '8px' }}>
                                             <DataListCell>
@@ -141,7 +141,7 @@ class SamplePage extends Component {
                                 <DownloadIcon size="md"/>
                             </Tooltip>
                         </CardHeader>
-                        <CardBody>
+                        <CardBody style={{ overflowY: 'auto'}}>
                         <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                         <pre style={{fontFamily: 'monospace',
                                     backgroundColor: '#e8e8e8',
