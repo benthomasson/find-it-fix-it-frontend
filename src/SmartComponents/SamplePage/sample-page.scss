@@ -84,6 +84,10 @@
     }
 }
 
+.pf-c-empty-state {
+  align-self: center;
+}
+
 @media only screen and (max-width: 600px) {
     .dataCard {
         flex-direction: column;

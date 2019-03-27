@@ -125,45 +125,51 @@ class SamplePage extends Component {
                     <div className="runDetails" style={{ display: 'flex' }}>
                         <Card className="pf-u-mr-md">
                             <CardHeader>Details</CardHeader>
-                            <CardBody>
-                                <Grid gutter="md">
-                                    <GridItem span={2}><b>Title</b></GridItem>
-                                    <GridItem span={10}>{this.controller.playbook.name}</GridItem>
-                                    <GridItem span={2}><b>Playbook</b></GridItem>
-                                    <GridItem span={10}>
-                                    <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>View playbook</span>
-                                    </GridItem>
-                                    <GridItem span={2}><b>Plays</b></GridItem>
-                                    <GridItem span={10}>
-                                    <ul>
-                                    <li></li>
-                                    <li></li>
-                                    </ul>
-                                    </GridItem>
-                                </Grid>
-                            </CardBody>
+                            { this.controller.playbook.name ?
+                                <CardBody>
+                                    <Grid gutter="md">
+                                        <GridItem span={2}><b>Title</b></GridItem>
+                                        <GridItem span={10}>{this.controller.playbook.name}</GridItem>
+                                        <GridItem span={2}><b>Playbook</b></GridItem>
+                                        <GridItem span={10}>
+                                        <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>View playbook</span>
+                                        </GridItem>
+                                        <GridItem span={2}><b>Plays</b></GridItem>
+                                        <GridItem span={10}>
+                                        <ul>
+                                        <li></li>
+                                        <li></li>
+                                        </ul>
+                                        </GridItem>
+                                    </Grid>
+                                </CardBody>
+                            :
+                            <EmptyState>
+                                <EmptyStateIcon icon={CubesIcon} />
+                                <EmptyStateBody>Host activity will appear here as Ansible executes the playbook. </EmptyStateBody>
+                            </EmptyState> }
                         </Card>
                         <Card className="taskCard" style={{ maxHeight: '500px' }}>
                             <CardHeader>Tasks</CardHeader>
-                                <CardBody style={{ maxHeight: '100%', overflowY: 'auto'}}>
-                                        {hosts.length > 0 ?
+                                {hosts.length > 0 ?
+                                    <CardBody style={{ maxHeight: '100%', overflowY: 'auto'}}>
                                         <DataList aria-label="Simple data list example">
-                                          <DataListItem aria-labelledby="simple-item1" style={{ marginBottom: '8px' }}>
-                                              <DataListCell>
-                                                  <h3><b>Host</b></h3>
-                                              </DataListCell>
-                                              <DataListCell>
-                                                  <h3><b>Activity</b></h3>
-                                              </DataListCell>
-                                          </DataListItem>
-                                          {hosts}
-                                          </DataList>
-                                          :
-																					<EmptyState>
-																					<EmptyStateIcon icon={CubesIcon} />
-																					<EmptyStateBody>Host activity will appear here as Ansible executes the playbook. </EmptyStateBody>
-																					</EmptyState>}
-                                </CardBody>
+                                            <DataListItem aria-labelledby="simple-item1" style={{ marginBottom: '8px' }}>
+                                                <DataListCell>
+                                                    <h3><b>Host</b></h3>
+                                                </DataListCell>
+                                                <DataListCell>
+                                                    <h3><b>Activity</b></h3>
+                                                </DataListCell>
+                                            </DataListItem>
+                                            {hosts}
+                                        </DataList>
+                                    </CardBody>
+                                :
+                                    <EmptyState>
+                                      <EmptyStateIcon icon={CubesIcon} />
+                                      <EmptyStateBody>Host activity will appear here as Ansible executes the playbook. </EmptyStateBody>
+                                    </EmptyState>}
                             </Card>
                         </div>
                     <Card className="logCard">
