@@ -1,11 +1,18 @@
 /* eslint-disable */
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import './sample-page.scss';
 import Controller from './logic.js';
 
+import yaml from 'js-yaml'
+
 import { Main, PageHeader, PageHeaderTitle } from '@red-hat-insights/insights-frontend-components';
-import { DownloadIcon, ExclamationCircleIcon, CircleIcon } from '@patternfly/react-icons';
+import { DownloadIcon,
+         ExclamationCircleIcon,
+         CircleIcon,
+         CubesIcon,
+         AngleDoubleUpIcon } from '@patternfly/react-icons';
 import {
     Button,
     Card,
@@ -17,6 +24,10 @@ import {
     Modal,
     Grid,
     GridItem,
+    EmptyState,
+    EmptyStateIcon,
+    EmptyStateBody,
+		Title,
     Tooltip
 } from '@patternfly/react-core';
 
@@ -41,6 +52,11 @@ class SamplePage extends Component {
         window.controller = this.controller;
 
         this.handleModalToggle = this.handleModalToggle.bind(this);
+        this.handleBackToTop = this.handleBackToTop.bind(this);
+    }
+
+    handleBackToTop(e) {
+        ReactDOM.findDOMNode(this).scrollIntoView({behavior: "smooth"});
     }
 
     handleModalToggle () {
@@ -76,7 +92,7 @@ class SamplePage extends Component {
             }
             var last_task = tasks.slice(-1)[0];
             console.log(last_task);
-            hosts.push(<DataListItem aria-labelledby="simple-item1">
+            hosts.push(<DataListItem aria-labelledby="simple-item1" key={host.name}>
                         <DataListCell>
                             <h3>
                             {last_task.status == 'ok' ?
@@ -113,12 +129,16 @@ class SamplePage extends Component {
                                 <Grid gutter="md">
                                     <GridItem span={2}><b>Title</b></GridItem>
                                     <GridItem span={10}>{this.controller.playbook.name}</GridItem>
-                                    <GridItem span={2}><b>Plan</b></GridItem>
-                                    <GridItem span={10}><ul><li><a href="">Plan Title 1</a></li>
-                                                            <li><a href="">Plan Title 2</a></li></ul></GridItem>
                                     <GridItem span={2}><b>Playbook</b></GridItem>
                                     <GridItem span={10}>
                                     <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>View playbook</span>
+                                    </GridItem>
+                                    <GridItem span={2}><b>Plays</b></GridItem>
+                                    <GridItem span={10}>
+                                    <ul>
+                                    <li></li>
+                                    <li></li>
+                                    </ul>
                                     </GridItem>
                                 </Grid>
                             </CardBody>
@@ -126,17 +146,23 @@ class SamplePage extends Component {
                         <Card className="taskCard" style={{ maxHeight: '500px' }}>
                             <CardHeader>Tasks</CardHeader>
                                 <CardBody style={{ maxHeight: '100%', overflowY: 'auto'}}>
-                                    <DataList aria-label="Simple data list example">
-                                        <DataListItem aria-labelledby="simple-item1" style={{ marginBottom: '8px' }}>
-                                            <DataListCell>
-                                                <h3><b>Host</b></h3>
-                                            </DataListCell>
-                                            <DataListCell>
-                                                <h3><b>Activity</b></h3>
-                                            </DataListCell>
-                                        </DataListItem>
-                                        {hosts}
-                                    </DataList>
+                                        {hosts.length > 0 ?
+                                        <DataList aria-label="Simple data list example">
+                                          <DataListItem aria-labelledby="simple-item1" style={{ marginBottom: '8px' }}>
+                                              <DataListCell>
+                                                  <h3><b>Host</b></h3>
+                                              </DataListCell>
+                                              <DataListCell>
+                                                  <h3><b>Activity</b></h3>
+                                              </DataListCell>
+                                          </DataListItem>
+                                          {hosts}
+                                          </DataList>
+                                          :
+																					<EmptyState>
+																					<EmptyStateIcon icon={CubesIcon} />
+																					<EmptyStateBody>Host activity will appear here as Ansible executes the playbook. </EmptyStateBody>
+																					</EmptyState>}
                                 </CardBody>
                             </Card>
                         </div>
@@ -151,7 +177,8 @@ class SamplePage extends Component {
                                 </Button>
                             </Tooltip>
                         </CardHeader>
-                        <CardBody style={{ overflowY: 'auto', paddingTop: '20px'}}>
+                        { this.controller.log.length > 0  ?
+                        <CardBody style={{ paddingTop: '20px'}}>
                         <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                         <pre style={{fontFamily: 'monospace',
                                      backgroundColor: '#e8e8e8',
@@ -159,16 +186,26 @@ class SamplePage extends Component {
                                      whiteSpace: 'pre-line',
                                      textAlign: 'right',
                                      border: '1px solid #b7b7b7',
-                                     borderRight: '0px'}}>{[...Array(this.controller.log.map(function (d) {return d.value;}).join('\n').split('\n').length+1).keys()].slice(1).join('\n')}</pre>
+                                     borderRight: '0px'}}>{[...Array(this.controller.log.map(function (d) {return d.value;}).join('\n').split('\n').length+2).keys()].slice(1).join('\n')}</pre>
                         <pre style={{fontFamily: 'monospace',
                                      backgroundColor: '#f6f6f6',
                                      padding: '10px',
                                      flex: '1',
                                      border: '1px solid #b7b7b7',
                                      marginTop: '0px',
-                                     whiteSpace: 'pre'}}>{this.controller.log.map(function (d) {return d.value;}).join('\n')}</pre>
-                               </div>
+                                     whiteSpace: 'pre'}}>{this.controller.log.map(function (d) {return d.value;}).join('\n')}
+                        <div  style={{/*paddingTop: "10px",*/ textAlign: "right"}}>
+                        <span class="backToTop" onClick={this.handleBackToTop} style={{textDecoration: "none"}}> <AngleDoubleUpIcon size="sm"/> BACK TO TOP</span>
+                        </div>
+                        </pre>
+
+                        </div>
                         </CardBody>
+                        :
+                        <EmptyState>
+                        <EmptyStateIcon icon={CubesIcon} />
+                        <EmptyStateBody>Ansible playbook run log will appear here as Ansible executes the playbook. </EmptyStateBody>
+                        </EmptyState>}
                     </Card>
                     <Modal
                         title={<div style={{borderBottom: '1px solid #aeaeae', paddingBottom: '20px', marginBottom: '20px'}}>{this.controller.playbook.name}</div>}

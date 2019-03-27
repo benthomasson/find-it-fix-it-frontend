@@ -67,6 +67,11 @@
     }
 }
 
+.backToTop {
+    cursor: pointer;
+    color: #337AB7;
+}
+
 .downloadIcon.pf-c-button.pf-m-tertiary {
     &:hover {
         --pf-c-button--m-tertiary--hover--BackgroundColor: #337AB7;
