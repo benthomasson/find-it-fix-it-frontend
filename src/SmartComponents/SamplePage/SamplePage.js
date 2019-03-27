@@ -14,6 +14,8 @@ import { DownloadIcon,
          CubesIcon,
          AngleDoubleUpIcon } from '@patternfly/react-icons';
 import {
+    Alert,
+    AlertActionCloseButton,
     Button,
     Card,
     CardBody,
@@ -46,6 +48,8 @@ class SamplePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            alertDangerVisible: false,
+            alertSuccessVisible: false,
           isModalOpen: false
         };
         this.controller = new Controller(this);
@@ -53,6 +57,15 @@ class SamplePage extends Component {
 
         this.handleModalToggle = this.handleModalToggle.bind(this);
         this.handleBackToTop = this.handleBackToTop.bind(this);
+        this.hideDangerAlert = this.hideDangerAlert.bind(this);
+        this.hideSuccessAlert = this.hideSuccessAlert.bind(this);
+    }
+
+    hideDangerAlert () {
+        this.setState({ alertDangerVisible: false });
+    }
+    hideSuccessAlert () {
+        this.setState({ alertSuccessVisible: false });
     }
 
     handleBackToTop(e) {
@@ -72,7 +85,11 @@ class SamplePage extends Component {
     }
 
     render() {
-        const { isModalOpen } = this.state;
+        const {
+            alertDangerVisible,
+            alertSuccessVisible,
+            isModalOpen
+        } = this.state;
 
         const dataListCellStyle = {
             color: '#aeaeae',
@@ -121,6 +138,20 @@ class SamplePage extends Component {
                 <PageHeader>
                     <PageHeaderTitle title='Find It, Fix It'/>
                 </PageHeader>
+                {alertDangerVisible && (
+                    <Alert
+                        variant="danger"
+                        title="Danger alert title"
+                        action={<AlertActionCloseButton onClose={this.hideDangerAlert} />}
+                    />
+                )}
+                {alertSuccessVisible && (
+                    <Alert
+                        variant="success"
+                        title="Success alert title"
+                        action={<AlertActionCloseButton onClose={this.hideSuccessAlert} />}
+                    />
+                )}
                 <Main>
                     <div className="runDetails" style={{ display: 'flex' }}>
                         <Card className="pf-u-mr-md">
@@ -230,7 +261,7 @@ class SamplePage extends Component {
                                      border: '1px solid #b7b7b7',
                                      whiteSpace: 'pre-line',
                                      textAlign: 'right',
-                                     borderRight: '0px'}}>{[...Array(this.controller.playbook.contents.split('\n').length+1).keys()].slice(1).join('\n')}</pre>
+                                     borderRight: '0px'}}>{[...Array(this.controller.playbook.contents.split('\n').length+1000).keys()].slice(1).join('\n')}</pre>
                         <pre style={{fontFamily: 'monospace',
                                      backgroundColor: '#f6f6f6',
                                      padding: '10px',

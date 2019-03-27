@@ -88,6 +88,10 @@
   align-self: center;
 }
 
+.pf-c-modal-box {
+    min-width: 600px;
+}
+
 @media only screen and (max-width: 600px) {
     .dataCard {
         flex-direction: column;
