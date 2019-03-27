@@ -48,8 +48,8 @@ class SamplePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            alertDangerVisible: false,
-            alertSuccessVisible: false,
+            alertDangerVisible: true,
+            alertSuccessVisible: true,
           isModalOpen: false
         };
         this.controller = new Controller(this);
@@ -100,14 +100,14 @@ class SamplePage extends Component {
         for (var i = 0; i < this.controller.hosts.length; i++) {
             var host = this.controller.hosts[i];
             var tasks = this.controller.tasks_by_host[host.host_id];
-            console.log(tasks);
+            console.log(['tasks', tasks]);
             if (tasks === undefined) {
                 continue;
             }
             if (tasks.length === 0) {
                 continue;
             }
-            var last_task = tasks.slice(-1)[0];
+            var last_task = tasks[0];
             console.log(last_task);
             hosts.push(<DataListItem aria-labelledby="simple-item1" key={host.name}>
                         <DataListCell>
@@ -141,32 +141,32 @@ class SamplePage extends Component {
                 {alertDangerVisible && (
                     <Alert
                         variant="danger"
-                        title="Danger alert title"
+                        title="Cannot reach API"
                         action={<AlertActionCloseButton onClose={this.hideDangerAlert} />}
                     />
                 )}
                 {alertSuccessVisible && (
                     <Alert
                         variant="success"
-                        title="Success alert title"
+                        title="Playbook completed"
                         action={<AlertActionCloseButton onClose={this.hideSuccessAlert} />}
                     />
                 )}
                 <Main>
                     <div className="runDetails" style={{ display: 'flex' }}>
-                        <Card className="pf-u-mr-md">
+                        <Card>
                             <CardHeader>Details</CardHeader>
                             { this.controller.playbook.name ?
                                 <CardBody>
                                     <Grid gutter="md">
-                                        <GridItem span={2}><b>Title</b></GridItem>
-                                        <GridItem span={10}>{this.controller.playbook.name}</GridItem>
-                                        <GridItem span={2}><b>Playbook</b></GridItem>
-                                        <GridItem span={10}>
+                                        <GridItem span={3}><b>Title</b></GridItem>
+                                        <GridItem span={9}>{this.controller.playbook.name}</GridItem>
+                                        <GridItem span={3}><b>Playbook</b></GridItem>
+                                        <GridItem span={9}>
                                         <span style={{ color: '#007bba', cursor: 'pointer' }} onClick={this.handleModalToggle}>View playbook</span>
                                         </GridItem>
-                                        <GridItem span={2}><b>Plays</b></GridItem>
-                                        <GridItem span={10}>
+                                        <GridItem span={3}><b>Plays</b></GridItem>
+                                        <GridItem span={9}>
                                         <ul>
                                         <li></li>
                                         <li></li>
@@ -177,7 +177,7 @@ class SamplePage extends Component {
                             :
                             <EmptyState>
                                 <EmptyStateIcon icon={CubesIcon} />
-                                <EmptyStateBody>Host activity will appear here as Ansible executes the playbook. </EmptyStateBody>
+                                <EmptyStateBody>Playbook details will appear here soon.</EmptyStateBody>
                             </EmptyState> }
                         </Card>
                         <Card className="taskCard" style={{ maxHeight: '500px' }}>
@@ -245,7 +245,7 @@ class SamplePage extends Component {
                         </EmptyState>}
                     </Card>
                     <Modal
-                        title={<div style={{borderBottom: '1px solid #aeaeae', paddingBottom: '20px', marginBottom: '20px'}}>{this.controller.playbook.name}</div>}
+                        title={this.controller.playbook.name}
                         isOpen={isModalOpen}
                         onClose={this.handleModalToggle}
                         actions={[
@@ -253,7 +253,7 @@ class SamplePage extends Component {
                         ]}>
                         <Card className="playBookCard">
 
-                        <CardBody>
+                        <CardBody style={{padding: '0px'}}>
                         <div style={{display: 'flex', justifyContent: 'flex-start' }}>
                         <pre style={{fontFamily: 'monospace',
                                      backgroundColor: '#e8e8e8',
@@ -261,7 +261,7 @@ class SamplePage extends Component {
                                      border: '1px solid #b7b7b7',
                                      whiteSpace: 'pre-line',
                                      textAlign: 'right',
-                                     borderRight: '0px'}}>{[...Array(this.controller.playbook.contents.split('\n').length+1000).keys()].slice(1).join('\n')}</pre>
+                                     borderRight: '0px'}}>{[...Array(this.controller.playbook.contents.split('\n').length+1).keys()].slice(1).join('\n')}</pre>
                         <pre style={{fontFamily: 'monospace',
                                      backgroundColor: '#f6f6f6',
                                      padding: '10px',

@@ -41,6 +41,9 @@
         --pf-c-card__body--PaddingLeft: 0;
         --pf-c-card__body--PaddingRight: 0;
     }
+    .pf-c-card + .pf-c-card {
+        margin-left: 20px;
+    }
 }
 
 .logCard {
@@ -94,6 +97,16 @@
 
 .pf-c-modal-box {
     min-width: 600px;
+    &__footer {
+        --pf-c-modal-box__footer--MarginTop:20px;
+    }
+    &__body {
+        --pf-c-modal-box--c-title--body--PaddingTop: 0px;
+        --pf-c-modal-box--body--MinHeight: calc(100vh - 30rem);
+    }
+    .pf-c-title {
+        padding-bottom: 20px;
+    }
 }
 
 @media only screen and (max-width: 992px) {
