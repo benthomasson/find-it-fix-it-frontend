@@ -96,11 +96,11 @@
     min-width: 600px;
 }
 
-@media only screen and (max-width: 600px) {
-    .dataCard {
+@media only screen and (max-width: 992px) {
+    .runDetails {
         flex-direction: column;
 
-        .pf-c-card {
+        .pf-c-card + .pf-c-card {
             margin: 20px 0 0 0;
         }
     }
