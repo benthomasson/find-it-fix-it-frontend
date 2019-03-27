@@ -72,7 +72,9 @@ _Running.prototype.end = function (controller) {
 _Running.prototype.onComplete = function (controller) {
 
     controller.changeState(Completed);
-
+    console.log('Completed');
+    clearInterval(controller.scope.status_poller);
+    clearInterval(controller.scope.log_poller);
 };
 _Running.prototype.onComplete.transitions = ['Completed'];
 
@@ -80,8 +82,8 @@ _Starting.prototype.start = function (controller) {
 
   controller.scope.launch_enabled = false;
   controller.scope.cancel_enabled = true;
-  controller.scope.status_poller = setInterval(controller.scope.poll_status, 500);
-  controller.scope.log_poller = setInterval(controller.scope.poll_log, 500);
+  controller.scope.status_poller = setInterval(controller.scope.poll_status, 1000);
+  controller.scope.log_poller = setInterval(controller.scope.poll_log, 1000);
 };
 
 
