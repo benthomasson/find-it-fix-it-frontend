@@ -125,39 +125,51 @@ class Controller {
     if (this.playbook_run_id === null) {
       return
     }
-    this.log = await this.get_api_list('playbookrunlog', 'playbook_run=' + this.playbook_run_id);
-    this.log.sort(function (a, b) {return a.order - b.order});
-    this.app.setState({});
+    try {
+      this.log = await this.get_api_list('playbookrunlog', 'playbook_run=' + this.playbook_run_id);
+      this.log.sort(function (a, b) {return a.order - b.order});
+      this.app.setState({});
+    } catch(err) {
+      console.log('api error in poll_log');
+    };
   }
 
   async poll_status () {
+    console.log('poll_status');
     if (this.playbook_run_id === null) {
+      console.log('no playbook_run_id');
       return
     }
-    var playbookrun = await this.get_api_object_by_pk('playbookrun', this.playbook_run_id)
-    console.log(playbookrun);
-    var new_tasks_by_host = {};
-    for(var i = 0; i < this.hosts.length; i++) {
-      new_tasks_by_host[this.hosts[i].host_id] = [];
+    try {
+      var playbookrun = await this.get_api_object_by_pk('playbookrun', this.playbook_run_id)
+      console.log(playbookrun);
+      var new_tasks_by_host = {};
+      for(var i = 0; i < this.hosts.length; i++) {
+        new_tasks_by_host[this.hosts[i].host_id] = [];
+      }
+      var trprs = await this.get_api_list('taskresultplaybookrun', 'playbook_run=' + this.playbook_run_id);
+      var task_results = await this.get_api_list('taskresult', 'taskresultplaybookrun__playbook_run=' + this.playbook_run_id)
+      for (i = 0; i < task_results.length; i++) {
+        var task = task_results[i];
+        new_tasks_by_host[task.host].push(task);
+        console.log(task);
+      }
+      for(i = 0; i < this.hosts.length; i++) {
+        new_tasks_by_host[this.hosts[i].host_id].sort(function (a, b) {return a.task_result_id - b.task_result_id});
+      }
+      this.tasks_by_host = new_tasks_by_host;
+      console.log(['playbookrun.status', playbookrun.status]);
+      if (playbookrun.status === "started") {
+        this.channel.send('Started', {});
+      }
+      if (playbookrun.status === "completed") {
+        this.channel.send('Complete', {});
+      }
+      this.app.setState({});
+    } catch(err) {
+       console.log('api error in poll_status');
     }
-    var trprs = await this.get_api_list('taskresultplaybookrun', 'playbook_run=' + this.playbook_run_id);
-    for (i = 0; i < trprs.length; i++) {
-      var trpr = trprs[i];
-      var task = await this.get_api_object_by_pk('taskresult', trpr.task_result)
-      new_tasks_by_host[task.host].push(task);
-      console.log(task);
-    }
-    for(i = 0; i < this.hosts.length; i++) {
-      new_tasks_by_host[this.hosts[i].host_id].sort(function (a, b) {return a.task_result_id - b.task_result_id});
-    }
-    this.tasks_by_host = new_tasks_by_host;
-    if (playbookrun.status === "started") {
-      this.channel.send('Started', {});
-    }
-    if (playbookrun.status === "completed") {
-      this.channel.send('Complete', {});
-    }
-    this.app.setState({});
+    console.log('poll_status end');
   }
 };
 export default Controller;

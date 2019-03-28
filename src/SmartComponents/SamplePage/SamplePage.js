@@ -48,8 +48,8 @@ class SamplePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            alertDangerVisible: true,
-            alertSuccessVisible: true,
+            alertDangerVisible: false,
+            alertSuccessVisible: false,
           isModalOpen: false
         };
         this.controller = new Controller(this);
@@ -107,7 +107,7 @@ class SamplePage extends Component {
             if (tasks.length === 0) {
                 continue;
             }
-            var last_task = tasks[0];
+            var last_task = tasks.slice(-1)[0];
             console.log(last_task);
             hosts.push(<DataListItem aria-labelledby="simple-item1" key={host.name}>
                         <DataListCell>
@@ -122,7 +122,7 @@ class SamplePage extends Component {
                             <Tooltip
                                 position="left"
                                 content={<p>Failed</p>} >
-                            <ExclamationCircleIcon size="sm" style={{ color: '#d44946', marginRight: '5px' }} />
+                            <CircleIcon size="sm" style={{ color: '#d44946', marginRight: '5px' }}/>
                             </Tooltip>
                             }
                             {host.name}</h3>
@@ -232,7 +232,7 @@ class SamplePage extends Component {
                                      marginTop: '0px',
                                      whiteSpace: 'pre'}}>{this.controller.log.map(function (d) {return d.value;}).join('\n')}
                         <div  style={{/*paddingTop: "10px",*/ textAlign: "right"}}>
-                        <span class="backToTop" onClick={this.handleBackToTop} style={{textDecoration: "none"}}> <AngleDoubleUpIcon size="sm"/> BACK TO TOP</span>
+                        <span className="backToTop" onClick={this.handleBackToTop} style={{textDecoration: "none"}}> <AngleDoubleUpIcon size="sm"/> BACK TO TOP</span>
                         </div>
                         </pre>
 
