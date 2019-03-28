@@ -1,6 +1,7 @@
 /* eslint-disable */
 import {fsm, util} from 'message-fsm';
 import launch_fsm from './launch.fsm.js';
+import yaml from 'js-yaml';
 
 async function postData(url = ``, data = {}) {
   // Default options are marked with *
@@ -45,7 +46,9 @@ class Controller {
     this.cancel_enabled = false;
     this.hosts = [];
     this.playbook = {name: "", contents: ""};
+    this.doc = [];
     this.playbook_run_id = null;
+    this.plays = [];
     this.log = [];
     this.tasks_by_host = {};
   }
@@ -53,8 +56,15 @@ class Controller {
   async init() {
     this.hosts = await this.get_api_list('host', 'inventory=' + this.inventory_id);
     this.playbook = await this.get_api_object('playbook', 'plan_id=' + this.plan_id);
+    this.doc = yaml.safeLoad(this.playbook.contents);
+    var i = 0;
+    for (i = 0; i < this.doc.length; i++) {
+      if (this.doc[i].name !== undefined) {
+        this.plays.push(this.doc[i].name);
+      }
+    }
     this.app.setState({});
-    for(var i = 0; i < this.hosts.length; i++) {
+    for(i = 0; i < this.hosts.length; i++) {
       this.tasks_by_host[this.hosts[i].host_id] = [];
     }
   }

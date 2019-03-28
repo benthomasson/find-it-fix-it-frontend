@@ -133,6 +133,12 @@ class SamplePage extends Component {
                     </DataListItem>);
         }
 
+        var plays = []
+
+        for (var i=0; i < this.controller.plays.length; i++) {
+          plays.push(<li>{this.controller.plays[i]}</li>);
+        }
+
         return (
             <React.Fragment>
                 <PageHeader>
@@ -168,8 +174,7 @@ class SamplePage extends Component {
                                         <GridItem span={3}><b>Plays</b></GridItem>
                                         <GridItem span={9}>
                                         <ul>
-                                        <li></li>
-                                        <li></li>
+                                        {plays}
                                         </ul>
                                         </GridItem>
                                     </Grid>
